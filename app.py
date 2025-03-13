@@ -1,5 +1,5 @@
 from flask import Flask
-from src.controllers.routes.login_route import CreateUserRoute
+from src.controllers.routes.login_blueprint import LoginBlueprint
 
 
 class MyApplication:
@@ -7,9 +7,7 @@ class MyApplication:
 
     def __init__(self) -> None:
         self.app = Flask(__name__, template_folder="src/views/templates")
-        self.app.add_url_rule(
-            "/create_user", view_func=CreateUserRoute.as_view("create_user")
-        )
+        self.app.register_blueprint(LoginBlueprint().login_bp)
 
     def run(self) -> None:
         """Run the application."""
