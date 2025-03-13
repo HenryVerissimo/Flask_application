@@ -11,9 +11,21 @@ class LoginBlueprint:
         self.build_routes()
 
     def build_routes(self):
+        self.login_bp.add_url_rule("/", view_func=LoginUserRoute.as_view("login_user"))
+
         self.login_bp.add_url_rule(
             "/create_user", view_func=CreateUserRoute.as_view("create_user")
         )
+
+
+class LoginUserRoute(MethodView):
+    """This class is a route with a form to login on the web application"""
+
+    def get(self):
+        return render_template("login_user.html")
+
+    def post(self):
+        pass
 
 
 class CreateUserRoute(MethodView):
@@ -22,17 +34,7 @@ class CreateUserRoute(MethodView):
     methods = ["GET", "POST"]
 
     def get(self):
-        return render_template(r"create_user.html")
-
-    def post(self):
-        pass
-
-
-class LoginUserRoute(MethodView):
-    """This class is a route with a form to login on the web application"""
-
-    def get(self):
-        pass
+        return render_template("create_user.html")
 
     def post(self):
         pass
